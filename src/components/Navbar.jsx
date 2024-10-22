@@ -12,8 +12,8 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0 flex  items-center">
-            <span className="text-white font-bold text-lg flex flex-row ">
-              <LuCalendarCheck className="text-3xl mr-2" />
+            <span className="text-white font-bold text-xl flex flex-row ">
+              <LuCalendarCheck className="text-4xl mr-2" />
               FullCalendar
             </span>
           </div>
@@ -41,23 +41,23 @@ const Navbar = () => {
               href="https://www.linkedin.com/in/bishworup11/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex items-center"
             >
-              <FaLinkedin className="mr-2" /> LinkedIn
+              <FaLinkedin className="mr-2 text-4xl text-white" /> LinkedIn
             </a>
             <a
               href="https://github.com/bishworup11"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex items-center"
             >
-              <FaGithub className="mr-2" /> GitHub
+              <FaGithub className="mr-2 text-4xl text-white" /> GitHub
             </a>
             <a
               href="mailto:bishworupmollik@gmail.com"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex items-center"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex items-center"
             >
-              <HiOutlineMail className="mr-2" /> Email
+              <HiOutlineMail className="mr-2 text-4xl text-white " /> Email
             </a>
           </div>
         </div>

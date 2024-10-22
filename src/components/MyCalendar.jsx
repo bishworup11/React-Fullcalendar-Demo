@@ -9,6 +9,7 @@ import momentTimezonePlugin from '@fullcalendar/moment-timezone';
 import moment from 'moment-timezone';
 import Sidebar from './Sidebar';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
+import 'moment-timezone/data/packed/latest.json';
 
 // Custom Modal Component
 const Modal = ({ isOpen, onClose, children }) => {
@@ -49,7 +50,7 @@ export default function MyCalendar() {
   const [selectInfo, setSelectInfo] = useState(null);
 
   useEffect(() => {
-    const deviceTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const deviceTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'; 
     setSelectedTimeZone(deviceTimeZone);
     const browserLocale = navigator.language;
     setSelectedLocale(browserLocale);
@@ -255,15 +256,17 @@ export default function MyCalendar() {
 }
 
 function renderEventContent(eventInfo) {
-  const formattedTime = moment(eventInfo.event.start)
-    .tz(eventInfo.view.calendar.getOption('timeZone'))
-    .format('hh:mm A');
+  // const timeZone = eventInfo.view.calendar.getOption('timeZone') || 'UTC';
+  // const formattedTime = moment(eventInfo.event.start).tz(timeZone).format('hh:mm A')
+  // const formattedTime = moment(eventInfo.event.start)
+  //   .tz(eventInfo.view.calendar.getOption('timeZone'))
+  //   .format('hh:mm A');
 
   return (
     <>
-        <b>{formattedTime}</b>
-      {/* <b>{eventInfo.timeText}</b> */}
-      <i>{eventInfo.event.title}</i>
+        {/* <b>{formattedTime}</b> */}
+      <b>{eventInfo.timeText}</b>
+      <i className='overflow-hidden'>{eventInfo.event.title}</i>
     </>
   );
 }
