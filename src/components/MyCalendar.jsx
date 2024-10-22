@@ -82,7 +82,7 @@ export default function MyCalendar() {
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: 'multiMonthYear,dayGridMonth,timeGridWeek,timeGridDay'
           }}
           initialView='dayGridMonth'
           themeSystem='solar'
@@ -105,9 +105,11 @@ export default function MyCalendar() {
 }
 
 function renderEventContent(eventInfo) {
+  const formattedTime = moment(eventInfo.event.start).format('hh:mm A');
   return (
     <>
-      <b>{eventInfo.timeText}</b>
+       <b>{formattedTime}</b>
+      {/* <b>{eventInfo.timeText}</b> */}
       <i>{eventInfo.event.title}</i>
     </>
   );
