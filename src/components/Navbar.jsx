@@ -14,7 +14,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 flex  items-center">
             <span className="text-white font-bold text-xl flex flex-row ">
               <LuCalendarCheck className="text-4xl mr-2" />
-              FullCalendar
+              MyCalendar
             </span>
           </div>
 
@@ -55,6 +55,7 @@ const Navbar = () => {
             </a>
             <a
               href="mailto:bishworupmollik@gmail.com"
+              
               className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex items-center"
             >
               <HiOutlineMail className="mr-2 text-4xl text-white " /> Email

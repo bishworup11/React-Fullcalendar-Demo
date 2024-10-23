@@ -1,22 +1,87 @@
-
-let eventGuid = 0
-let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
+let eventGuid = 0;
+let today = new Date();
+let todayStr = today.toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of today
+let tomorrowStr = new Date(today.setDate(today.getDate() + 1)).toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of tomorrow
 
 export const INITIAL_EVENTS = [
   {
     id: createEventId(),
     title: 'All-day event',
-    start: todayStr
+    start: todayStr,
+    extendedProps: {
+      description: "A full day event with no specific time."
+    }
   },
   {
     id: createEventId(),
     title: 'Timed event',
-    start: todayStr + 'T12:00:00'
+    start: todayStr + 'T12:00:00',
+    extendedProps: {
+      description: "Scheduled event at noon today."
+    }
+  },
+  {
+    allDay: true,
+    title: "All-day event",
+    start: tomorrowStr,
+    id: createEventId(),
+    extendedProps: {
+      description: "Another all-day event with no time constraint tomorrow."
+    }
+  },
+  {
+    allDay: false,
+    title: "Timed event",
+    start: tomorrowStr + 'T12:00:00+06:00',
+    id: createEventId(),
+    extendedProps: {
+      description: "Midday event tomorrow."
+    }
+  },
+  {
+    allDay: false,
+    title: "BreakFast",
+    start: tomorrowStr + 'T13:00:00+06:00',
+    end: tomorrowStr + 'T13:30:00+06:00',
+    id: createEventId(),
+    extendedProps: {
+      description: "Quick breakfast break tomorrow."
+    }
+  },
+  {
+    allDay: false,
+    title: "Dinner",
+    start: tomorrowStr + 'T04:00:00+06:00',
+    end: tomorrowStr + 'T04:30:00+06:00',
+    id: createEventId(),
+    extendedProps: {
+      description: "Late-night dinner tomorrow."
+    }
+  },
+  {
+    allDay: false,
+    title: "Lunch Break",
+    start: tomorrowStr + 'T20:00:00+06:00',
+    end: tomorrowStr + 'T21:00:00+06:00',
+    id: createEventId(),
+    extendedProps: {
+      description: "Lunch break tomorrow."
+    }
+  },
+  {
+    allDay: false,
+    title: "Play Football or Walk 30 min",
+    start: tomorrowStr + 'T23:30:00+06:00',
+    end: new Date(today.setDate(today.getDate() + 1)).toISOString().replace(/T.*$/, '') + 'T00:00:00+06:00',
+    id: createEventId(),
+    extendedProps: {
+      description: "Evening exercise session tomorrow."
+    }
   }
-]
+];
 
 export function createEventId() {
-  return String(eventGuid++)
+  return String(eventGuid++);
 }
 
 

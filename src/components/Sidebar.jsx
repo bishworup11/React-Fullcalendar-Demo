@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { formatDate } from "@fullcalendar/core";
 import { TIME_ZONES, Locales } from "./event-utils";
 import { FaChevronDown } from "react-icons/fa";
+import { GiBurningSkull } from "react-icons/gi";
 
 const Sidebar = ({
   weekendsVisible = true,
@@ -11,6 +12,7 @@ const Sidebar = ({
   selectedLocale = "en",
   handleTimeZoneChange,
   handleLocalChange,
+  onEventClick,
 }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
 
@@ -71,6 +73,7 @@ const Sidebar = ({
               key={event.id}
               event={event}
               timeZone={selectedTimeZone}
+              onEventClick={onEventClick}
             />
           ))}
         </ul>
@@ -84,7 +87,10 @@ const Sidebar = ({
 
   return (
     <div className="w-64 bg-gray-800 text-white max-h-full p-4 mt-11">
-      <h1 className="text-xl font-bold mb-6">Calendar Demo</h1>
+      <h1 className="text-xl font-bold mb-6 flex items-center hover:scale-110 transition-all duration-300">
+        <GiBurningSkull className="text-6xl font-bold mb-2 mr-2 hover:text-red-500 hover:scale-110 transition-all duration-300" /> 
+        Calendar Demo
+        </h1>
       <nav className="space-y-1">
         {menuItems.map((item) => (
           <div key={item.id}>
@@ -171,23 +177,50 @@ const RenderDropdownContent = ({
   );
 };
 
-const SidebarEvent = ({ event, timeZone }) => {
+
+
+const SidebarEvent = ({ event, timeZone, onEventClick }) => {
   if (!event || !event.start) return null;
 
+  const handleClick = () => {
+    onEventClick(event.start);
+  };
+
   return (
-    <li className="py-1">
-      <b>
+    <li 
+      className="py-1 cursor-pointer hover:bg-gray-700 px-2 rounded transition-colors"
+      onClick={handleClick}
+    >
+       {event.allDay ? <b>All Day</b> :  <b>
         {formatDate(event.start, {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
           timeZone: timeZone || "UTC",
           hour: "numeric",
           minute: "2-digit",
           meridiem: "short",
         })}
-      </b>
+      </b>}
       <i className="ml-2">{event.title}</i>
     </li>
   );
-};
+}
+
+// const SidebarEvent = ({ event, timeZone }) => {
+//   if (!event || !event.start) return null;
+
+//   return (
+//     <li className="py-1">
+//       <b>
+//         {formatDate(event.start, {
+//           year: "numeric",
+//           month: "short",
+//           day: "numeric",
+//           timeZone: timeZone || "UTC",
+//           hour: "numeric",
+//           minute: "2-digit",
+//           meridiem: "short",
+//         })}
+//       </b>
+//       <i className="ml-2">{event.title}</i>
+//     </li>
+//   );
+// };

@@ -27,8 +27,8 @@ This project is a demo application that showcases the integration of the FullCal
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/bishworup11/react-fullcalendar-demo.git
-    cd react-fullcalendar-demo
+    git clone https://github.com/bishworup11/React-Fullcalendar-Demo.git
+    cd React-Fullcalendar-Demo
     ```
 
 2. **Install dependencies**:

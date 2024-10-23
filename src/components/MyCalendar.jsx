@@ -113,7 +113,13 @@ export default function MyCalendar() {
 
   function handleEvents(events) {
     setCurrentEvents(events);
+    console.log(events);
   }
+
+  const handleEventNavigation = (date) => {
+    const calendarApi = calendarRef.current.getApi();
+    calendarApi.gotoDate(date);
+  };
 
   return (
     <div className="demo-app">
@@ -125,6 +131,7 @@ export default function MyCalendar() {
         selectedLocale={selectedLocale}
         handleTimeZoneChange={(e) => setSelectedTimeZone(e.target.value)}
         handleLocalChange={(e) => setSelectedLocale(e.target.value)}
+        onEventClick={handleEventNavigation}
       />
       
       <div className="demo-app-main">
@@ -145,7 +152,7 @@ export default function MyCalendar() {
           weekends={weekendsVisible}
           initialEvents={INITIAL_EVENTS}
           select={handleDateSelect}
-          eventContent={renderEventContent}
+          eventContent={(eventInfo) => renderEventContent(eventInfo, selectedTimeZone)}
           eventClick={handleEventClick}
           eventsSet={handleEvents}
           timeZone={selectedTimeZone}
@@ -255,7 +262,7 @@ export default function MyCalendar() {
   );
 }
 
-function renderEventContent(eventInfo) {
+function renderEventContent(eventInfo,timeZone) {
   // const timeZone = eventInfo.view.calendar.getOption('timeZone') || 'UTC';
   // const formattedTime = moment(eventInfo.event.start).tz(timeZone).format('hh:mm A')
   // const formattedTime = moment(eventInfo.event.start)
@@ -265,7 +272,25 @@ function renderEventContent(eventInfo) {
   return (
     <>
         {/* <b>{formattedTime}</b> */}
-      <b>{eventInfo.timeText}</b>
+       {/* <b>{eventInfo.timeText}</b> */}
+
+       {/* <b>
+        {formatDate(eventInfo.timeText, {
+          timeZone: timeZone || "UTC",
+          hour: "numeric",
+          minute: "2-digit",
+          meridiem: "short",
+        })}
+      </b> */}
+      {eventInfo.event.allDay ? <b>All Day</b> :  <b>
+        {formatDate(eventInfo.event.start, {
+          timeZone: timeZone || "UTC",
+          hour: "numeric",
+          minute: "2-digit",
+          meridiem: "short",
+        })}
+      </b>}
+      
       <i className='overflow-hidden'>{eventInfo.event.title}</i>
     </>
   );
